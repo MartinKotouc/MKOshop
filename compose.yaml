@@ -1,9 +1,25 @@
+#services:
+#  postgres:
+#    image: 'postgres:latest'
+#    environment:
+#      - 'POSTGRES_DB=mydatabase'
+#      - 'POSTGRES_PASSWORD=secret'
+#      - 'POSTGRES_USER=myuser'
+#    ports:
+#      - '5432'
+version: '3.8'
 services:
-  postgres:
-    image: 'postgres:latest'
+  db:
+    image: postgres:14.1-alpine
+    restart: always
     environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=eshop-db
     ports:
-      - '5432'
+      - '5432:5432'
+    volumes:
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local

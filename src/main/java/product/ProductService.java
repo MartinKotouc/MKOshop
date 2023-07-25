@@ -1,17 +1,18 @@
 package product;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Repository
+@Service
 public class ProductService {
     private final ProductJpaRepository productJpaRepository;
 
     @Autowired
     public ProductService(ProductJpaRepository productJpaRepository)
     {//dependency injection
+        System.out.println("ProductService constructor");
         this.productJpaRepository = productJpaRepository;
     }
 
@@ -50,7 +51,7 @@ public class ProductService {
     public void deleteProduct(long id)
     {//smaze product ze seznamu
         System.out.println("Mažu produkt ID: " + id );
-        productJpaRepository.delete(getProductById(id));
+        productJpaRepository.deleteById(id);
     }
 
 }
